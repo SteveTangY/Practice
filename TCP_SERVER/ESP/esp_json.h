@@ -16,6 +16,7 @@
 class JsonReader
 {
 protected:
+    // Json::Reader json_reader;
     JsonReader() {}
     virtual ~JsonReader() {}
 };
@@ -39,6 +40,14 @@ private:
 public:
     explicit EspJson(const std::string& file_name_) : file_name(file_name_) {
         write_buffer.clear();
+        json_file.open(file_name, std::ios::in);
+        while (json_file.is_open() == false) { /* open file */
+            json_file.open(file_name, std::ios::out);
+            printf("\nwait the file to open...\n");
+            usleep(WAIT_FILE_TIME_US);
+        }
+        json_file >> json_root;
+        json_file.close();
     }
     virtual ~EspJson() {
         if (json_file.is_open())

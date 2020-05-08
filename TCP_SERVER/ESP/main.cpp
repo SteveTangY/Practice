@@ -17,21 +17,21 @@ bool data_form_check(std::string& server_data)
     if (server_data.length() == 0)
         return false;
     int length = server_data.length();
-    if ( (server_data[0] == '#' && server_data[1] == '#') && 
-        (server_data[length-1] == '$' && server_data[length-2] == '$') ) {
+    if ( (server_data[0] == '#' && server_data[1] == '#' && server_data[2] == ';') && 
+        (server_data[length-1] == '$' && server_data[length-2] == '$' &&  server_data[length-3] == ';') ) {
         server_data.erase(0,3);
         length = server_data.length();
         server_data.erase(length-3, 3);
         return true;
     } else {
-        // printf("\nfail checking func's data string:%s\n", server_data.c_str());
+        printf("\nfail checking func's data string:%s\n", server_data.c_str());//log
         return false;
     }
 }
 
 void get_pair_data(std::string& server_data)
 {
-    // printf("\nbegin get_pair_data...str is:%s\n", server_data.c_str());
+    // printf("\nbegin get_pair_data...str is:%s\n", server_data.c_str());//log
     int length = server_data.length();
     short i = 0;
     std::string key = "";

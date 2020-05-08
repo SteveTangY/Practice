@@ -39,7 +39,7 @@ void EspTcpServer::multi_run()
             sock_client = accept(sock_server, (struct sockaddr*)&c_in, &addr_len);
             continue;
         }
-        // printf("accept from ip:%s, data seg:%s", inet_ntoa(c_in.sin_addr), recv_buffer);
+        printf("accept from ip:%s, data seg:%s\n", inet_ntoa(c_in.sin_addr), recv_buffer);//log
         std::lock_guard<std::mutex> lock(server_mutex); /* data generator mutex */
         if (data_total_num >= server_data_queue.size()) {
             server_data_buffer.append(recv_buffer, std::strlen(recv_buffer)); 
@@ -92,7 +92,7 @@ int main()
     while (1) {
         std::lock_guard<std::mutex> lock(main_mutex);
         if (test_server.get_server_data_queue_size() >9) {
-            // printf("data queue length is:%d\n", test_server.get_server_data_queue_size());
+            // printf("data queue length is:%d\n", test_server.get_server_data_queue_size());//log
             test_server.stop();
             break;
         }
