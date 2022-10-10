@@ -1,3 +1,16 @@
+*.o
 *.out
-*.json
-*.replit
+
+*.ko
+*.cmd
+*.mod
+*.mod.*
+*.order
+*.symvers
+
+*.so
+
+ *.json
+
+.vscode
+.replit
